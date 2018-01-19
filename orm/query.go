@@ -731,6 +731,13 @@ func (q *Query) Delete(values ...interface{}) (Result, error) {
 	return res, nil
 }
 
+func (q *Query) RawCreateTable(opt *CreateTableOptions) *createTableQuery {
+	return &createTableQuery{
+		q:   q,
+		opt: opt,
+	}
+}
+
 func (q *Query) CreateTable(opt *CreateTableOptions) (Result, error) {
 	if q.stickyErr != nil {
 		return nil, q.stickyErr
